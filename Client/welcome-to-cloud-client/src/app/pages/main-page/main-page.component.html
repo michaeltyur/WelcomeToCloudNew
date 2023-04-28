@@ -1,0 +1,32 @@
+<div class="container h-100 d-flex flex-column justify-content-center">
+    <div *ngIf="error" style="position: absolute;left: 0;top: 6rem;width: 100%;" class="alert alert-danger" role="alert">
+        {{error}}
+    </div>
+    <div class="row">
+        <div class="col-6 m-auto">
+            <nb-card [nbSpinner]="factLoader" nbSpinnerStatus="danger" nbSpinnerSize="large">
+                <nb-card-header>
+                    <div class="row" *ngIf="error">
+                        <p  class="text-danger">ERROR</p>
+                    </div>
+                    <div class="row" *ngIf="response">
+                        <p  class="text-warning"> {{response.metaData}}</p>
+                    </div>
+                    <div class="row" *ngIf="response" class="row h-100">
+                       <p>framework version: <span class="text-info">{{response.frVersion}}</span> </p> 
+                    </div>
+                </nb-card-header>
+                <nb-card-body *ngIf="response">
+                    <p >Current User: <span class="text-info">{{response.currentUser}}</span></p>
+                    <p >TimeStamp: <span class="text-success">{{response.timeStamp}}</span></p>
+                    <p >Funny fact: <span class="text-primary">{{response.data}}</span></p>
+                </nb-card-body>
+                <nb-card-footer>
+                    <button [disabled]="factLoader" nbButton outline fullWidth status="success"
+                        (click)="getRandomFact()">Get Data from Server</button>
+                </nb-card-footer>
+            </nb-card>
+        </div>
+    </div>
+
+</div>

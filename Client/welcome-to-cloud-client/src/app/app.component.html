@@ -1,0 +1,31 @@
+<nb-layout>
+
+  <nb-layout-header fixed>
+    <div class="row w-100">
+      <div class="col-auto">
+        <h4 style="font-style: italic;"> Wellcome to Cloud</h4>
+      </div>
+      <div class="col m-auto text-center">
+        <h6 *ngIf="url">url: <span class="text-warning">{{url}}</span></h6>       
+      </div>
+      <div class="col-auto">
+        <div class="row">
+          <div class="col text-end"><h5>Framework</h5> </div>
+          <div class="col-auto"><nb-toggle status="warning" (checkedChange)="checkedChange($event)"></nb-toggle></div>
+          <div class="col text-start"><h5>Core</h5> </div>
+        </div>
+      </div>
+    </div>
+ 
+  </nb-layout-header>
+
+  <nb-layout-column>
+ 
+    <router-outlet></router-outlet>
+    
+  </nb-layout-column>
+
+  <!-- <nb-layout-footer fixed>
+  </nb-layout-footer> -->
+
+</nb-layout>
