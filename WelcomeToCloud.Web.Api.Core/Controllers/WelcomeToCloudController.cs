@@ -17,12 +17,22 @@ namespace WelcomeToCloud.Web.Api.Core.Controllers
         }
 
         [HttpGet("hello")]
-        [Impersonation]
+        //[Impersonation]
         public string Hello()
         {
-            string messsage = $"{WindowsIdentity.GetCurrent().Name}. TimeStamp: {DateTime.Now}";
-            //string  messsage = $"{User.Identity.Name}. TimeStamp: {DateTime.Now}";
-            return messsage;
+            try
+            {
+                //Environment.UserName
+               // return $"Hello  TimeStamp: {DateTime.Now}";
+                //string messsage = $"{WindowsIdentity.GetCurrent().Name}. TimeStamp: {DateTime.Now}";
+                string  messsage = $"{Environment.UserName}. TimeStamp: {DateTime.Now}";
+                return messsage;
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine(ex.ToString());
+                throw;
+            }
         }
 
         [HttpPost("get-data")]
@@ -36,7 +46,15 @@ namespace WelcomeToCloud.Web.Api.Core.Controllers
             //    result = ProcessGetData(data);
             //    return Task.CompletedTask;
             //});
-            return ProcessGetData(data);
+            try
+            {
+                return ProcessGetData(data);
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine(ex.ToString());
+                throw;
+            }
         }
         private ResponseEntity ProcessGetData(RequestEntity data)
         {
