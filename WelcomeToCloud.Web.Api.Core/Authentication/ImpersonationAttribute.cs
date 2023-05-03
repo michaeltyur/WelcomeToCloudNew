@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc.Filters;
+﻿using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Mvc.Filters;
+using System.Security.Claims;
 using System.Security.Principal;
 
 namespace WelcomeToCloud.Web.Api.Core
@@ -25,7 +27,8 @@ namespace WelcomeToCloud.Web.Api.Core
         //}
         public override  async Task OnActionExecutionAsync(ActionExecutingContext context,ActionExecutionDelegate next)
         {
-            var currentIdentity = (WindowsIdentity)context.HttpContext.User.Identity;
+            //var currentIdentity = (ClaimsIdentity)context.HttpContext.User.Identity;
+            var currentIdentity = WindowsIdentity.GetCurrent();
             await WindowsIdentity.RunImpersonatedAsync(currentIdentity.AccessToken, async () =>
             {
                await base.OnActionExecutionAsync(context, next);
